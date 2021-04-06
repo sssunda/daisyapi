@@ -8,7 +8,7 @@ COPY . .
 
 RUN make deps
 
-ENV FLASK_APP apps
+ENV FLASK_APP app.main
 
 ENV FLASK_ENV development
 

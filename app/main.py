@@ -7,6 +7,9 @@ from app.api.restx import api
 def create_app():
     app = Flask(__name__)
 
+    # config setting
+    app.config.from_pyfile("./configs/dev.py")
+
     blueprint = Blueprint("api", __name__)
     api.init_app(blueprint)
     api.add_namespace(ns_auth)

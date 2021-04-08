@@ -30,7 +30,7 @@ class Login(Resource):
         password = TEST_USER.get(parsed.email)
         if password is None or password != parsed.password:
             # Invalid email or password
-            return ''
+            return response.bad_request()
 
         access_token = encrypt_jwt(parsed.email)
         return response.success({"access_token": access_token})

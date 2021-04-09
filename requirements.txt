@@ -4,7 +4,6 @@ astroid==2.5.1
 attrs==20.3.0
 cfgv==3.2.0
 click==7.1.2
--e git+git@github.com:sssunda/daisyapi.git@8a2e0ba6f068daa2a86a31fb6ace44d894cedef4#egg=daisyapi
 distlib==0.3.1
 filelock==3.0.12
 flake8==3.9.0

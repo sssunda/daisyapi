@@ -1,8 +1,8 @@
 from flask import request
 import time
 
-from app import TEST_USER
 from app.api import response
+from app.api.auth.database import TEST_USER
 from app.api.auth.modules.encrypt import decrypt_jwt
 
 

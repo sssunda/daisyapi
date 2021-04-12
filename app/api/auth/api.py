@@ -1,9 +1,9 @@
 from flask_restx import Resource, reqparse
 
-from app import TEST_USER
-from app.api.restx import api
-from app.api.auth.modules.encrypt import encrypt_jwt
 from app.api import response
+from app.api.restx import api
+from app.api.auth.database import TEST_USER
+from app.api.auth.modules.encrypt import encrypt_jwt
 from app.api.auth.modules.decorate import jwt_token_required
 
 ns = api.namespace("auth", description="Endpoints for user auth")
@@ -11,12 +11,6 @@ ns = api.namespace("auth", description="Endpoints for user auth")
 parser = reqparse.RequestParser()
 parser.add_argument("email", required=True)
 parser.add_argument("password", required=True)
-
-
-@ns.route("/")
-class Auth(Resource):
-    def get(self):
-        return 'hello'
 
 
 @ns.route("/login")
@@ -33,8 +27,8 @@ class Login(Resource):
         return response.success({"access_token": access_token})
 
 
-@ns.route("/me")
-class Me(Resource):
+@ns.route("/verify")
+class Verify(Resource):
     @jwt_token_required
     def get(self, **kwargs):
-        return response.success({"email": kwargs["auth_email"]})
+        return response.success(msg="Token has been verified")

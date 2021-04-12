@@ -1,5 +1,6 @@
 import jwt
 import time
+import hashlib
 from flask import current_app
 
 
@@ -14,6 +15,10 @@ def _validate_jwt(data):
     for key in ["email", "iat", "exp"]:
         if key not in data:
             raise KeyError
+
+
+def encrypt_password(password):
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 
 def encrypt_jwt(email):

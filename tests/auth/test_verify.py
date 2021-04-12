@@ -1,7 +1,7 @@
 import pytest
 import time
 from flask import current_app
-from app.api.auth.modules import encrypt
+from app.api.auth.modules.encrypt import encrypt_jwt
 
 
 def _login(client, email, password):
@@ -34,7 +34,7 @@ def test_verify_returns_400(client):
 def test_verify_returns_401_1(client):
     # It's not auth user
     email = 'test_user_3@test.com'
-    access_token = encrypt.encrypt_jwt(email)
+    access_token = encrypt_jwt(email)
     resp = client.get("/auth/verify", headers={"Authorization": access_token})
 
     assert resp.status_code == 401

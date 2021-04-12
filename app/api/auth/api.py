@@ -3,7 +3,7 @@ from flask_restx import Resource, reqparse
 from app.api import response
 from app.api.restx import api
 from app.api.auth.database import TEST_USER
-from app.api.auth.modules.encrypt import encrypt_jwt
+from app.api.auth.modules.encrypt import encrypt_jwt, encrypt_password
 from app.api.auth.modules.decorate import jwt_token_required
 
 ns = api.namespace("auth", description="Endpoints for user auth")
@@ -19,7 +19,7 @@ class Login(Resource):
         parsed = parser.parse_args()
 
         password = TEST_USER.get(parsed.email)
-        if password is None or password != parsed.password:
+        if password is None or password != encrypt_password(parsed.password):
             # Invalid email or password
             return response.bad_request()
 

@@ -42,6 +42,8 @@ def test_verify_returns_401_1(client):
 
 def test_verify_returns_401_2(client):
     # Access token has been expired
+    # Temporary config
+    current_app.config['JWT_EXP_PERIOD'] = 3
     email = 'test_user_1@test.com'
     password = 'password1'
     access_token = _login(client, email, password)

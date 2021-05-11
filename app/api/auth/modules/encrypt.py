@@ -1,14 +1,8 @@
 import jwt
 import time
 import hashlib
-from flask import current_app
 
-
-def _get_config(key):
-    value = current_app.config.get(key)
-    if value is None:
-        raise ValueError
-    return value
+from app.util.configs import get_config
 
 
 def _validate_jwt(data):
@@ -22,9 +16,9 @@ def encrypt_password(password):
 
 
 def encrypt_jwt(email):
-    jwt_exp_period = _get_config("JWT_EXP_PERIOD")
-    jwt_algo = _get_config("JWT_ALGO")
-    jwt_secret_key = _get_config("JWT_SECRET_KEY")
+    jwt_exp_period = get_config("JWT_EXP_PERIOD")
+    jwt_algo = get_config("JWT_ALGO")
+    jwt_secret_key = get_config("JWT_SECRET_KEY")
 
     iat = time.time()
     payload = {"email": email, "iat": iat, "exp": iat + jwt_exp_period}
@@ -33,7 +27,7 @@ def encrypt_jwt(email):
 
 def decrypt_jwt(token):
     data = jwt.decode(token,
-                      _get_config("JWT_SECRET_KEY"),
-                      algorithms=[_get_config("JWT_ALGO")])
+                      get_config("JWT_SECRET_KEY"),
+                      algorithms=[get_config("JWT_ALGO")])
     _validate_jwt(data)
     return data

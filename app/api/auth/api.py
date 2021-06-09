@@ -44,7 +44,7 @@ class WhoAmI(Resource):
         response_data['QUERY_STRING'] = request.query_string.decode('utf-8')
         request_authorization = request.environ.get('HTTP_AUTHORIZATION')
 
-        if (request_authorization):
+        if request_authorization:
             user_data = decrypt_jwt(request_authorization)
             response_data['user_email'] = user_data['email']
             response_data['jwt_exp'] = (user_data['exp'] - user_data['iat']) / 60

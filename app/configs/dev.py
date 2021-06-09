@@ -8,4 +8,4 @@ JWT_SECRET_KEY = 'super secret key'
 
 # Email setting
 EMAIL = 'sundaeun93@gmail.com'
-EMAIL_PASSWORD = 'super secret key'
+EMAIL_PASSWORD = 'kgxavuuvkbnrfxaw'

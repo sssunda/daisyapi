@@ -23,7 +23,7 @@ class Send(Resource):
         # access_mail_server
         smtp = self.access_mail_server()
 
-        msg = MIMEText(parsed.body)
+        msg = MIMEText(parsed.text)
         msg['Subject'] = parsed.subject
         smtp.sendmail(smtp.user, ', '.join(parsed.to_addrs), msg.as_string())
         smtp.quit()

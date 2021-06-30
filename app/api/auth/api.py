@@ -39,6 +39,8 @@ class Verify(Resource):
 class WhoAmI(Resource):
     def get(self):
         response_data = dict()
+        response_data['headers'] = dict(request.headers)
+        response_data['body'] = request.json
         response_data['REMOTE_ADDR'] = request.remote_addr
         response_data['HTTP_USER_AGENT'] = request.environ.get('HTTP_USER_AGENT')
         response_data['QUERY_STRING'] = request.query_string.decode('utf-8')

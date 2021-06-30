@@ -18,7 +18,11 @@ def test_whoami_returns_200_1(client):
     password = 'password1'
     access_token = _login(client, email, password)
     resp = client.get("/auth/whoami?p=par&&t=too",
-                      headers={"Authorization": access_token})
+                      headers={
+                          "Authorization": access_token,
+                      },
+                      json={'test': 'TTTT', 't': 'T'}
+                      )
 
     assert resp.status_code == 200
 

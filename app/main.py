@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint
+from celery import Celery
 
 from app.api.auth.api import ns as ns_auth
 from app.api.mail.api import ns as ns_mail
@@ -20,4 +21,13 @@ def create_app():
     return app
 
 
+def make_celery(app):
+    celery = Celery(app.name,
+                    backend=app.config['CELERY_RESULT_BACKEND'],
+                    broker=app.config['BROKER_URL'])
+    celery.conf.update(app.config)
+    return celery
+
+
 app = create_app()
+celery = make_celery(app)
